@@ -1,4 +1,5 @@
-﻿using Minio.DataModel;
+﻿using DAABOM.Properties;
+using Minio.DataModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +26,7 @@ namespace DAABOM
             minioServerChooseButton.Enabled = false;
             minioBucketComboBox.Enabled = false;
 
-            workingFolderTextBox.Text = Program.workingFolderPath = Properties.Settings.Default.WorkingFolder;
+            workingFolderTextBox.Text = Program.workingFolderPath = Settings.Default.WorkingFolder;
 
             Program.onClientClosed += ClearMinioFields;
         }
@@ -68,6 +69,20 @@ namespace DAABOM
             minioBucketComboBox.Text = string.Empty;
             launchOnlineButton.Enabled = false;
             minioBucketComboBox.Enabled = false;
+        }
+
+        private void launchLocalButton_Click(object sender, EventArgs e)
+        {
+            DataBrowser browser = new(false);
+            browser.ShowDialog();
+        }
+
+        private void launchOnlineButton_Click(object sender, EventArgs e)
+        {
+            Program.workingBucket = Program.bucketDictionary[minioBucketComboBox.Text];
+
+            DataBrowser browser = new(true);
+            browser.ShowDialog();
         }
     }
 }

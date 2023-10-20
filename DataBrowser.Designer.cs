@@ -30,12 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataBrowser));
             statusStrip = new StatusStrip();
-            toolStripStatusLabel = new ToolStripStatusLabel();
+            projectToolStripStatusLabel = new ToolStripStatusLabel();
+            projectNameToolStripStatusLabel = new ToolStripStatusLabel();
+            localToolStripStatusLabel = new ToolStripStatusLabel();
+            localFilepathToolStripStatusLabel = new ToolStripStatusLabel();
             toolStripProgressBar = new ToolStripProgressBar();
             editPropertiesSplitButton = new ToolStripSplitButton();
             enableEditingToolStripMenuItem = new ToolStripMenuItem();
             saveChangesToolStripMenuItem = new ToolStripMenuItem();
             discardChangesToolStripMenuItem = new ToolStripMenuItem();
+            serverToolStripStatusLabel = new ToolStripStatusLabel();
             splitContainerMain = new SplitContainer();
             splitContainerLeft = new SplitContainer();
             projectComboBox = new ComboBox();
@@ -138,23 +142,47 @@
             // statusStrip
             // 
             statusStrip.ImageScalingSize = new Size(18, 18);
-            statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel, toolStripProgressBar, editPropertiesSplitButton });
+            statusStrip.Items.AddRange(new ToolStripItem[] { projectToolStripStatusLabel, projectNameToolStripStatusLabel, localToolStripStatusLabel, localFilepathToolStripStatusLabel, toolStripProgressBar, editPropertiesSplitButton, serverToolStripStatusLabel });
             statusStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             statusStrip.Location = new Point(0, 575);
             statusStrip.Name = "statusStrip";
+            statusStrip.ShowItemToolTips = true;
             statusStrip.Size = new Size(1008, 24);
             statusStrip.TabIndex = 0;
             statusStrip.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel
+            // projectToolStripStatusLabel
             // 
-            toolStripStatusLabel.AutoSize = false;
-            toolStripStatusLabel.IsLink = true;
-            toolStripStatusLabel.LinkBehavior = LinkBehavior.AlwaysUnderline;
-            toolStripStatusLabel.Margin = new Padding(0, 3, 6, 2);
-            toolStripStatusLabel.Name = "toolStripStatusLabel";
-            toolStripStatusLabel.Size = new Size(333, 19);
-            toolStripStatusLabel.Text = "filepath";
+            projectToolStripStatusLabel.Name = "projectToolStripStatusLabel";
+            projectToolStripStatusLabel.Size = new Size(51, 19);
+            projectToolStripStatusLabel.Text = "Project:";
+            // 
+            // projectNameToolStripStatusLabel
+            // 
+            projectNameToolStripStatusLabel.AutoSize = false;
+            projectNameToolStripStatusLabel.LinkBehavior = LinkBehavior.AlwaysUnderline;
+            projectNameToolStripStatusLabel.Margin = new Padding(0, 3, 6, 2);
+            projectNameToolStripStatusLabel.Name = "projectNameToolStripStatusLabel";
+            projectNameToolStripStatusLabel.Size = new Size(280, 19);
+            projectNameToolStripStatusLabel.Text = "?";
+            projectNameToolStripStatusLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // localToolStripStatusLabel
+            // 
+            localToolStripStatusLabel.Name = "localToolStripStatusLabel";
+            localToolStripStatusLabel.Size = new Size(90, 19);
+            localToolStripStatusLabel.Text = "Local Filepath:";
+            // 
+            // localFilepathToolStripStatusLabel
+            // 
+            localFilepathToolStripStatusLabel.AutoSize = false;
+            localFilepathToolStripStatusLabel.IsLink = true;
+            localFilepathToolStripStatusLabel.LinkBehavior = LinkBehavior.AlwaysUnderline;
+            localFilepathToolStripStatusLabel.Margin = new Padding(0, 3, 6, 2);
+            localFilepathToolStripStatusLabel.Name = "localFilepathToolStripStatusLabel";
+            localFilepathToolStripStatusLabel.Size = new Size(400, 19);
+            localFilepathToolStripStatusLabel.Text = "?";
+            localFilepathToolStripStatusLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // toolStripProgressBar
             // 
@@ -166,10 +194,11 @@
             // 
             editPropertiesSplitButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             editPropertiesSplitButton.DropDownItems.AddRange(new ToolStripItem[] { enableEditingToolStripMenuItem, saveChangesToolStripMenuItem, discardChangesToolStripMenuItem });
-            editPropertiesSplitButton.Image = (Image)resources.GetObject("editPropertiesSplitButton.Image");
+            editPropertiesSplitButton.Image = Properties.Resources.signature_no_0;
+            editPropertiesSplitButton.ImageScaling = ToolStripItemImageScaling.None;
             editPropertiesSplitButton.ImageTransparentColor = Color.Magenta;
             editPropertiesSplitButton.Name = "editPropertiesSplitButton";
-            editPropertiesSplitButton.Size = new Size(35, 22);
+            editPropertiesSplitButton.Size = new Size(33, 22);
             editPropertiesSplitButton.Text = "Edit Properties";
             // 
             // enableEditingToolStripMenuItem
@@ -190,6 +219,15 @@
             discardChangesToolStripMenuItem.Size = new Size(180, 24);
             discardChangesToolStripMenuItem.Text = "Discard Changes";
             discardChangesToolStripMenuItem.Click += enableEditingToolStripMenuItem_Click;
+            // 
+            // serverToolStripStatusLabel
+            // 
+            serverToolStripStatusLabel.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            serverToolStripStatusLabel.Image = Properties.Resources.network_drive_unavailable_1;
+            serverToolStripStatusLabel.ImageScaling = ToolStripItemImageScaling.None;
+            serverToolStripStatusLabel.Name = "serverToolStripStatusLabel";
+            serverToolStripStatusLabel.Size = new Size(16, 19);
+            serverToolStripStatusLabel.Text = "Server";
             // 
             // splitContainerMain
             // 
@@ -1006,7 +1044,7 @@
         private TextBox revisionTextBox;
         private DateTimePicker revisionDateTimePicker;
         private TextBox notesTextBox;
-        private ToolStripStatusLabel toolStripStatusLabel;
+        private ToolStripStatusLabel localFilepathToolStripStatusLabel;
         private ToolStripProgressBar toolStripProgressBar;
         private ListView revisionsListView;
         private ColumnHeader revisionsRevisionColumnHeader;
@@ -1042,5 +1080,9 @@
         private ListView revisionReferencesListView;
         private Label commonReferencesLabel;
         private Label revisionReferencesLabel;
+        private ToolStripStatusLabel localToolStripStatusLabel;
+        private ToolStripStatusLabel projectToolStripStatusLabel;
+        private ToolStripStatusLabel projectNameToolStripStatusLabel;
+        private ToolStripStatusLabel serverToolStripStatusLabel;
     }
 }

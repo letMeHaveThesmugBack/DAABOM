@@ -186,6 +186,7 @@
             launchOnlineButton.TabIndex = 0;
             launchOnlineButton.Text = "Launch Online";
             launchOnlineButton.UseVisualStyleBackColor = true;
+            launchOnlineButton.Click += launchOnlineButton_Click;
             // 
             // launchLocalButton
             // 
@@ -197,6 +198,7 @@
             launchLocalButton.TabIndex = 1;
             launchLocalButton.Text = "Launch Local";
             launchLocalButton.UseVisualStyleBackColor = true;
+            launchLocalButton.Click += launchLocalButton_Click;
             // 
             // Welcome
             // 

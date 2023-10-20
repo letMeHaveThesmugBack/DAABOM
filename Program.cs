@@ -88,8 +88,8 @@ namespace DAABOM
                     bucketDictionary.Add(bucket.Name, bucket);
                 }
 
-                MessageBox.Show("Connected Successfully! " +
-                    numberOfBuckets + (numberOfBuckets > 1 ? " buckets were found." : " bucket was found."),
+                MessageBox.Show($"Connected Successfully! {numberOfBuckets}{(numberOfBuckets > 1 ? " buckets were found." : 
+                    " bucket was found.")}",
                     "Minio Connection Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 callingDialog.Close();
                 callingDialog.DialogResult = DialogResult.OK;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAABOM.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Minio.DataModel;
 
 namespace DAABOM
 {
     public partial class DataBrowser : Form
     {
-        public DataBrowser()
+        public DataBrowser(bool isConnected)
         {
             InitializeComponent();
+            UpdateConnectionIcon(isConnected);
         }
 
         private void DataBrowser_Load(object sender, EventArgs e)
@@ -22,72 +25,7 @@ namespace DAABOM
 
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataTree_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void projectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripComboBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripComboBox1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
         {
 
         }
@@ -98,11 +36,6 @@ namespace DAABOM
         }
 
         private void originLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void revisionLabel_Click(object sender, EventArgs e)
         {
 
         }
@@ -122,14 +55,21 @@ namespace DAABOM
 
         }
 
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        private void projectComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void projectComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        internal void UpdateConnectionIcon(bool isConnected)
         {
+            serverToolStripStatusLabel.Image =
+                isConnected ? Resources.network_drive_world_1 : Resources.network_drive_unavailable_1;
 
+            string workingBucketName = Program.workingBucket is not null ? Program.workingBucket.Name : "Error! Null Bucket!";
+
+            serverToolStripStatusLabel.ToolTipText =
+                isConnected ? $"Connected to {Program.connectedServer} bucket \"{workingBucketName}\"" :
+                "Local mode";
         }
     }
 }
