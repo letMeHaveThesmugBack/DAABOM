@@ -25,7 +25,8 @@ namespace DAABOM
 
         private void MinioServerDialog_Load(object sender, EventArgs e)
         {
-
+            serverTextBox.Text = Program.connectedServer ?? Properties.Settings.Default.MinioServer;
+            usernameTextBox.Text = Program.username ?? Properties.Settings.Default.Username;
         }
 
         private void connectButton_Click(object sender, EventArgs e)

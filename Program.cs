@@ -1,3 +1,4 @@
+using DAABOM.Properties;
 using Minio;
 using Minio.DataModel;
 using Minio.DataModel.Result;
@@ -8,12 +9,13 @@ namespace DAABOM
 {
     internal static class Program
     {
-        internal static IMinioClient client = new MinioClient();
-        internal static string connectedServer = string.Empty;
-        internal static string workingFolderPath = string.Empty;
-        internal static Dictionary<string, Bucket> bucketDictionary = new();
-        internal static Bucket workingBucket = new();
+        internal static string? workingFolderPath;
 
+        internal static IMinioClient client =  new MinioClient();
+        internal static string? connectedServer;
+        internal static string? username;
+        internal static Dictionary<string, Bucket> bucketDictionary = new();
+        internal static Bucket? workingBucket = new();
         internal delegate void OnClientClosed();
         internal static event OnClientClosed? onClientClosed;
 
@@ -77,6 +79,9 @@ namespace DAABOM
                     throw new BucketNotFoundException("No buckets were found.");
                 }
 
+                connectedServer = Settings.Default.MinioServer = credentials.Domain;
+                username = Settings.Default.Username = credentials.UserName;
+
                 bucketDictionary.Clear();
                 foreach (Bucket bucket in bucketList.Buckets)
                 {
@@ -104,7 +109,8 @@ namespace DAABOM
         internal static void CloseClient()
         {
             client.Dispose();
-            connectedServer = string.Empty;
+            connectedServer = null;
+            username = null;
             bucketDictionary.Clear();
             workingBucket = new();
 

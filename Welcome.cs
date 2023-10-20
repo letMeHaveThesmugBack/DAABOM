@@ -16,8 +16,6 @@ namespace DAABOM
         public Welcome()
         {
             InitializeComponent();
-
-            workingFolderTextBox.Text = Program.workingFolderPath = Properties.Settings.Default.WorkingFolder;
         }
 
         private void Welcome_Load(object sender, EventArgs e)
@@ -27,6 +25,8 @@ namespace DAABOM
             minioServerChooseButton.Enabled = false;
             minioBucketComboBox.Enabled = false;
 
+            workingFolderTextBox.Text = Program.workingFolderPath = Properties.Settings.Default.WorkingFolder;
+
             Program.onClientClosed += ClearMinioFields;
         }
 
@@ -34,8 +34,10 @@ namespace DAABOM
         {
             if (workingFolderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                Properties.Settings.Default.WorkingFolder = workingFolderBrowserDialog.SelectedPath;
-                workingFolderTextBox.Text = workingFolderBrowserDialog.SelectedPath;
+                Program.workingFolderPath =
+                    workingFolderTextBox.Text =
+                    Properties.Settings.Default.WorkingFolder =
+                    workingFolderBrowserDialog.SelectedPath;
 
                 launchLocalButton.Enabled = true;
                 minioServerChooseButton.Enabled = true;
