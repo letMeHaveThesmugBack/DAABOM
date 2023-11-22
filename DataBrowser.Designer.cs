@@ -28,34 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            TreeNode treeNode1 = new TreeNode("Assemblies", 7, 7);
+            TreeNode treeNode2 = new TreeNode("Parts", 7, 7);
+            TreeNode treeNode3 = new TreeNode("Materials", 7, 7);
+            TreeNode treeNode4 = new TreeNode("Other", 7, 7);
+            TreeNode treeNode5 = new TreeNode("? (No Project)", 6, 6, new TreeNode[] { treeNode1, treeNode2, treeNode3, treeNode4 });
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataBrowser));
+            TreeNode treeNode6 = new TreeNode("? (No Component)", 1, 1);
             statusStrip = new StatusStrip();
-            projectToolStripStatusLabel = new ToolStripStatusLabel();
-            projectNameToolStripStatusLabel = new ToolStripStatusLabel();
-            localToolStripStatusLabel = new ToolStripStatusLabel();
+            localFilepathLabelToolStripStatusLabel = new ToolStripStatusLabel();
             localFilepathToolStripStatusLabel = new ToolStripStatusLabel();
-            toolStripProgressBar = new ToolStripProgressBar();
             editPropertiesSplitButton = new ToolStripSplitButton();
             enableEditingToolStripMenuItem = new ToolStripMenuItem();
             saveChangesToolStripMenuItem = new ToolStripMenuItem();
             discardChangesToolStripMenuItem = new ToolStripMenuItem();
             serverToolStripStatusLabel = new ToolStripStatusLabel();
+            toolStripProgressBar = new ToolStripProgressBar();
             splitContainerMain = new SplitContainer();
-            splitContainerLeft = new SplitContainer();
-            projectComboBox = new ComboBox();
+            treeTabControl = new TabControl();
+            projectTabPage = new TabPage();
             projectTreeView = new TreeView();
+            treeViewImageList = new ImageList(components);
+            componentTabPage = new TabPage();
+            componentTreeView = new TreeView();
             tabControl = new TabControl();
             propertiesPage = new TabPage();
             propertiesTableLayoutPanel = new TableLayoutPanel();
             notesLabel = new Label();
-            manufacturerLabel = new Label();
+            vendorLabel = new Label();
             originLabel = new Label();
             descriptionLabel = new Label();
             revisionLabel = new Label();
             titleLabel = new Label();
             statusLabel = new Label();
             materialLabel = new Label();
-            manufacturerPNLabel = new Label();
+            vendorPNLabel = new Label();
             partNumberLabel = new Label();
             partNumberTextBox = new TextBox();
             titleTextBox = new TextBox();
@@ -66,21 +74,16 @@
             materialTextBox = new TextBox();
             statusComboBox = new ComboBox();
             notesTextBox = new TextBox();
-            splitContainerRevision = new SplitContainer();
+            revisionSplitContainer = new SplitContainer();
             revisionTextBox = new TextBox();
             revisionDateTimePicker = new DateTimePicker();
-            revisionsPage = new TabPage();
-            revisionsListView = new ListView();
-            revisionsRevisionColumnHeader = new ColumnHeader();
-            revisionsRevisionDateColumnHeader = new ColumnHeader();
-            revisionsFilepathColumnHeader = new ColumnHeader();
-            usagePage = new TabPage();
-            usageListView = new ListView();
-            usagePartNumberColumnHeader = new ColumnHeader();
-            usageTitleColumnHeader = new ColumnHeader();
-            usageRevisionColumnHeader = new ColumnHeader();
-            dataPage = new TabPage();
-            dataTableLayoutPanel = new TableLayoutPanel();
+            whereUsedPage = new TabPage();
+            whereUsedListView = new ListView();
+            whereUsedPartNumberColumnHeader = new ColumnHeader();
+            whereUsedTitleColumnHeader = new ColumnHeader();
+            whereUsedRevisionColumnHeader = new ColumnHeader();
+            referencesPage = new TabPage();
+            whereUsedTableLayoutPanel = new TableLayoutPanel();
             SWFileLabel = new Label();
             SWDWGLabel = new Label();
             DWGPDFLabel = new Label();
@@ -93,37 +96,33 @@
             DWGPDFSplitContainer = new SplitContainer();
             DWGPDFOpenButton = new Button();
             DWGPDFFilepathTextBox = new TextBox();
-            commonReferencesListView = new ListView();
             revisionReferencesListView = new ListView();
-            commonReferencesLabel = new Label();
             revisionReferencesLabel = new Label();
             previewPage = new TabPage();
             menuStrip = new MenuStrip();
-            projectToolStripMenuItem = new ToolStripMenuItem();
-            selectProjectToolStripMenuItem = new ToolStripMenuItem();
-            settingsMenu = new ToolStripMenuItem();
-            minioToolStripMenuItem = new ToolStripMenuItem();
-            authenticationToolStripMenuItem = new ToolStripMenuItem();
+            projectListToolStripComboBox = new ToolStripComboBox();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            newToolStripMenuItem = new ToolStripMenuItem();
+            newProjectToolStripMenuItem = new ToolStripMenuItem();
+            newComponentToolStripMenuItem = new ToolStripMenuItem();
             statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainerMain).BeginInit();
             splitContainerMain.Panel1.SuspendLayout();
             splitContainerMain.Panel2.SuspendLayout();
             splitContainerMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainerLeft).BeginInit();
-            splitContainerLeft.Panel1.SuspendLayout();
-            splitContainerLeft.Panel2.SuspendLayout();
-            splitContainerLeft.SuspendLayout();
+            treeTabControl.SuspendLayout();
+            projectTabPage.SuspendLayout();
+            componentTabPage.SuspendLayout();
             tabControl.SuspendLayout();
             propertiesPage.SuspendLayout();
             propertiesTableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainerRevision).BeginInit();
-            splitContainerRevision.Panel1.SuspendLayout();
-            splitContainerRevision.Panel2.SuspendLayout();
-            splitContainerRevision.SuspendLayout();
-            revisionsPage.SuspendLayout();
-            usagePage.SuspendLayout();
-            dataPage.SuspendLayout();
-            dataTableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)revisionSplitContainer).BeginInit();
+            revisionSplitContainer.Panel1.SuspendLayout();
+            revisionSplitContainer.Panel2.SuspendLayout();
+            revisionSplitContainer.SuspendLayout();
+            whereUsedPage.SuspendLayout();
+            referencesPage.SuspendLayout();
+            whereUsedTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SWFileSplitContainer).BeginInit();
             SWFileSplitContainer.Panel1.SuspendLayout();
             SWFileSplitContainer.Panel2.SuspendLayout();
@@ -142,8 +141,7 @@
             // statusStrip
             // 
             statusStrip.ImageScalingSize = new Size(18, 18);
-            statusStrip.Items.AddRange(new ToolStripItem[] { projectToolStripStatusLabel, projectNameToolStripStatusLabel, localToolStripStatusLabel, localFilepathToolStripStatusLabel, toolStripProgressBar, editPropertiesSplitButton, serverToolStripStatusLabel });
-            statusStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            statusStrip.Items.AddRange(new ToolStripItem[] { localFilepathLabelToolStripStatusLabel, localFilepathToolStripStatusLabel, editPropertiesSplitButton, serverToolStripStatusLabel, toolStripProgressBar });
             statusStrip.Location = new Point(0, 575);
             statusStrip.Name = "statusStrip";
             statusStrip.ShowItemToolTips = true;
@@ -151,44 +149,23 @@
             statusStrip.TabIndex = 0;
             statusStrip.Text = "statusStrip1";
             // 
-            // projectToolStripStatusLabel
+            // localFilepathLabelToolStripStatusLabel
             // 
-            projectToolStripStatusLabel.Name = "projectToolStripStatusLabel";
-            projectToolStripStatusLabel.Size = new Size(51, 19);
-            projectToolStripStatusLabel.Text = "Project:";
-            // 
-            // projectNameToolStripStatusLabel
-            // 
-            projectNameToolStripStatusLabel.AutoSize = false;
-            projectNameToolStripStatusLabel.LinkBehavior = LinkBehavior.AlwaysUnderline;
-            projectNameToolStripStatusLabel.Margin = new Padding(0, 3, 6, 2);
-            projectNameToolStripStatusLabel.Name = "projectNameToolStripStatusLabel";
-            projectNameToolStripStatusLabel.Size = new Size(280, 19);
-            projectNameToolStripStatusLabel.Text = "?";
-            projectNameToolStripStatusLabel.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // localToolStripStatusLabel
-            // 
-            localToolStripStatusLabel.Name = "localToolStripStatusLabel";
-            localToolStripStatusLabel.Size = new Size(90, 19);
-            localToolStripStatusLabel.Text = "Local Filepath:";
+            localFilepathLabelToolStripStatusLabel.Name = "localFilepathLabelToolStripStatusLabel";
+            localFilepathLabelToolStripStatusLabel.Size = new Size(90, 19);
+            localFilepathLabelToolStripStatusLabel.Text = "Local Filepath:";
             // 
             // localFilepathToolStripStatusLabel
             // 
             localFilepathToolStripStatusLabel.AutoSize = false;
             localFilepathToolStripStatusLabel.IsLink = true;
             localFilepathToolStripStatusLabel.LinkBehavior = LinkBehavior.AlwaysUnderline;
-            localFilepathToolStripStatusLabel.Margin = new Padding(0, 3, 6, 2);
             localFilepathToolStripStatusLabel.Name = "localFilepathToolStripStatusLabel";
-            localFilepathToolStripStatusLabel.Size = new Size(400, 19);
+            localFilepathToolStripStatusLabel.RightToLeft = RightToLeft.No;
+            localFilepathToolStripStatusLabel.Size = new Size(746, 19);
+            localFilepathToolStripStatusLabel.Spring = true;
             localFilepathToolStripStatusLabel.Text = "?";
             localFilepathToolStripStatusLabel.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // toolStripProgressBar
-            // 
-            toolStripProgressBar.Alignment = ToolStripItemAlignment.Right;
-            toolStripProgressBar.Name = "toolStripProgressBar";
-            toolStripProgressBar.Size = new Size(100, 18);
             // 
             // editPropertiesSplitButton
             // 
@@ -199,7 +176,6 @@
             editPropertiesSplitButton.ImageTransparentColor = Color.Magenta;
             editPropertiesSplitButton.Name = "editPropertiesSplitButton";
             editPropertiesSplitButton.Size = new Size(33, 22);
-            editPropertiesSplitButton.Text = "Edit Properties";
             // 
             // enableEditingToolStripMenuItem
             // 
@@ -218,86 +194,146 @@
             discardChangesToolStripMenuItem.Name = "discardChangesToolStripMenuItem";
             discardChangesToolStripMenuItem.Size = new Size(180, 24);
             discardChangesToolStripMenuItem.Text = "Discard Changes";
-            discardChangesToolStripMenuItem.Click += enableEditingToolStripMenuItem_Click;
             // 
             // serverToolStripStatusLabel
             // 
             serverToolStripStatusLabel.DisplayStyle = ToolStripItemDisplayStyle.Image;
             serverToolStripStatusLabel.Image = Properties.Resources.network_drive_unavailable_1;
             serverToolStripStatusLabel.ImageScaling = ToolStripItemImageScaling.None;
+            serverToolStripStatusLabel.Margin = new Padding(0, 3, 6, 2);
             serverToolStripStatusLabel.Name = "serverToolStripStatusLabel";
             serverToolStripStatusLabel.Size = new Size(16, 19);
-            serverToolStripStatusLabel.Text = "Server";
+            // 
+            // toolStripProgressBar
+            // 
+            toolStripProgressBar.Name = "toolStripProgressBar";
+            toolStripProgressBar.Size = new Size(100, 18);
             // 
             // splitContainerMain
             // 
             splitContainerMain.BorderStyle = BorderStyle.Fixed3D;
             splitContainerMain.Dock = DockStyle.Fill;
-            splitContainerMain.Location = new Point(0, 25);
+            splitContainerMain.Location = new Point(0, 29);
             splitContainerMain.Name = "splitContainerMain";
             // 
             // splitContainerMain.Panel1
             // 
-            splitContainerMain.Panel1.Controls.Add(splitContainerLeft);
+            splitContainerMain.Panel1.Controls.Add(treeTabControl);
             // 
             // splitContainerMain.Panel2
             // 
             splitContainerMain.Panel2.Controls.Add(tabControl);
-            splitContainerMain.Size = new Size(1008, 550);
+            splitContainerMain.Size = new Size(1008, 546);
             splitContainerMain.SplitterDistance = 336;
             splitContainerMain.TabIndex = 1;
             // 
-            // splitContainerLeft
+            // treeTabControl
             // 
-            splitContainerLeft.BorderStyle = BorderStyle.Fixed3D;
-            splitContainerLeft.Dock = DockStyle.Fill;
-            splitContainerLeft.FixedPanel = FixedPanel.Panel1;
-            splitContainerLeft.IsSplitterFixed = true;
-            splitContainerLeft.Location = new Point(0, 0);
-            splitContainerLeft.Name = "splitContainerLeft";
-            splitContainerLeft.Orientation = Orientation.Horizontal;
+            treeTabControl.Controls.Add(projectTabPage);
+            treeTabControl.Controls.Add(componentTabPage);
+            treeTabControl.Dock = DockStyle.Fill;
+            treeTabControl.Location = new Point(0, 0);
+            treeTabControl.Name = "treeTabControl";
+            treeTabControl.SelectedIndex = 0;
+            treeTabControl.Size = new Size(332, 542);
+            treeTabControl.TabIndex = 0;
             // 
-            // splitContainerLeft.Panel1
+            // projectTabPage
             // 
-            splitContainerLeft.Panel1.Controls.Add(projectComboBox);
-            // 
-            // splitContainerLeft.Panel2
-            // 
-            splitContainerLeft.Panel2.Controls.Add(projectTreeView);
-            splitContainerLeft.Size = new Size(336, 550);
-            splitContainerLeft.SplitterDistance = 25;
-            splitContainerLeft.TabIndex = 0;
-            // 
-            // projectComboBox
-            // 
-            projectComboBox.Dock = DockStyle.Fill;
-            projectComboBox.FormattingEnabled = true;
-            projectComboBox.Location = new Point(0, 0);
-            projectComboBox.Name = "projectComboBox";
-            projectComboBox.Size = new Size(332, 25);
-            projectComboBox.TabIndex = 0;
-            projectComboBox.SelectedIndexChanged += projectComboBox_SelectedIndexChanged;
+            projectTabPage.Controls.Add(projectTreeView);
+            projectTabPage.Location = new Point(4, 26);
+            projectTabPage.Name = "projectTabPage";
+            projectTabPage.Padding = new Padding(3);
+            projectTabPage.Size = new Size(324, 512);
+            projectTabPage.TabIndex = 0;
+            projectTabPage.Text = "Project";
+            projectTabPage.UseVisualStyleBackColor = true;
             // 
             // projectTreeView
             // 
             projectTreeView.Dock = DockStyle.Fill;
-            projectTreeView.Location = new Point(0, 0);
+            projectTreeView.ImageIndex = 0;
+            projectTreeView.ImageList = treeViewImageList;
+            projectTreeView.Location = new Point(3, 3);
             projectTreeView.Name = "projectTreeView";
-            projectTreeView.Size = new Size(332, 517);
+            treeNode1.ImageIndex = 7;
+            treeNode1.Name = "assembliesNode";
+            treeNode1.SelectedImageIndex = 7;
+            treeNode1.Text = "Assemblies";
+            treeNode2.ImageIndex = 7;
+            treeNode2.Name = "partsNode";
+            treeNode2.SelectedImageIndex = 7;
+            treeNode2.Text = "Parts";
+            treeNode3.ImageIndex = 7;
+            treeNode3.Name = "materialsNode";
+            treeNode3.SelectedImageIndex = 7;
+            treeNode3.Text = "Materials";
+            treeNode4.ImageIndex = 7;
+            treeNode4.Name = "otherNode";
+            treeNode4.SelectedImageIndex = 7;
+            treeNode4.Text = "Other";
+            treeNode5.ImageIndex = 6;
+            treeNode5.Name = "projectNode";
+            treeNode5.SelectedImageIndex = 6;
+            treeNode5.Text = "? (No Project)";
+            projectTreeView.Nodes.AddRange(new TreeNode[] { treeNode5 });
+            projectTreeView.SelectedImageIndex = 0;
+            projectTreeView.Size = new Size(318, 506);
             projectTreeView.TabIndex = 0;
+            projectTreeView.NodeMouseDoubleClick += projectTreeView_NodeMouseDoubleClick;
+            // 
+            // treeViewImageList
+            // 
+            treeViewImageList.ColorDepth = ColorDepth.Depth8Bit;
+            treeViewImageList.ImageStream = (ImageListStreamer)resources.GetObject("treeViewImageList.ImageStream");
+            treeViewImageList.TransparentColor = Color.Transparent;
+            treeViewImageList.Images.SetKeyName(0, "check-1.png");
+            treeViewImageList.Images.SetKeyName(1, "circle_question-1.png");
+            treeViewImageList.Images.SetKeyName(2, "gears_3-1.png");
+            treeViewImageList.Images.SetKeyName(3, "gears-1.png");
+            treeViewImageList.Images.SetKeyName(4, "cylinder_database-0.png");
+            treeViewImageList.Images.SetKeyName(5, "network_drive_world-1.png");
+            treeViewImageList.Images.SetKeyName(6, "desktop-3.png");
+            treeViewImageList.Images.SetKeyName(7, "directory_closed-1.png");
+            // 
+            // componentTabPage
+            // 
+            componentTabPage.Controls.Add(componentTreeView);
+            componentTabPage.Location = new Point(4, 26);
+            componentTabPage.Name = "componentTabPage";
+            componentTabPage.Padding = new Padding(3);
+            componentTabPage.Size = new Size(324, 512);
+            componentTabPage.TabIndex = 1;
+            componentTabPage.Text = "Component";
+            componentTabPage.UseVisualStyleBackColor = true;
+            // 
+            // componentTreeView
+            // 
+            componentTreeView.Dock = DockStyle.Fill;
+            componentTreeView.ImageIndex = 0;
+            componentTreeView.ImageList = treeViewImageList;
+            componentTreeView.Location = new Point(3, 3);
+            componentTreeView.Name = "componentTreeView";
+            treeNode6.ImageIndex = 1;
+            treeNode6.Name = "componentNode";
+            treeNode6.SelectedImageIndex = 1;
+            treeNode6.Text = "? (No Component)";
+            componentTreeView.Nodes.AddRange(new TreeNode[] { treeNode6 });
+            componentTreeView.SelectedImageIndex = 0;
+            componentTreeView.Size = new Size(318, 506);
+            componentTreeView.TabIndex = 0;
             // 
             // tabControl
             // 
             tabControl.Controls.Add(propertiesPage);
-            tabControl.Controls.Add(revisionsPage);
-            tabControl.Controls.Add(usagePage);
-            tabControl.Controls.Add(dataPage);
+            tabControl.Controls.Add(whereUsedPage);
+            tabControl.Controls.Add(referencesPage);
             tabControl.Controls.Add(previewPage);
             tabControl.Dock = DockStyle.Fill;
             tabControl.Location = new Point(0, 0);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(664, 546);
+            tabControl.Size = new Size(664, 542);
             tabControl.TabIndex = 0;
             // 
             // propertiesPage
@@ -306,7 +342,7 @@
             propertiesPage.Location = new Point(4, 26);
             propertiesPage.Name = "propertiesPage";
             propertiesPage.Padding = new Padding(3);
-            propertiesPage.Size = new Size(656, 516);
+            propertiesPage.Size = new Size(656, 512);
             propertiesPage.TabIndex = 0;
             propertiesPage.Text = "Properties";
             propertiesPage.UseVisualStyleBackColor = true;
@@ -318,14 +354,14 @@
             propertiesTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             propertiesTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             propertiesTableLayoutPanel.Controls.Add(notesLabel, 0, 10);
-            propertiesTableLayoutPanel.Controls.Add(manufacturerLabel, 0, 6);
+            propertiesTableLayoutPanel.Controls.Add(vendorLabel, 0, 6);
             propertiesTableLayoutPanel.Controls.Add(originLabel, 0, 5);
             propertiesTableLayoutPanel.Controls.Add(descriptionLabel, 0, 2);
             propertiesTableLayoutPanel.Controls.Add(revisionLabel, 0, 3);
             propertiesTableLayoutPanel.Controls.Add(titleLabel, 0, 1);
             propertiesTableLayoutPanel.Controls.Add(statusLabel, 0, 9);
             propertiesTableLayoutPanel.Controls.Add(materialLabel, 0, 8);
-            propertiesTableLayoutPanel.Controls.Add(manufacturerPNLabel, 0, 7);
+            propertiesTableLayoutPanel.Controls.Add(vendorPNLabel, 0, 7);
             propertiesTableLayoutPanel.Controls.Add(partNumberLabel, 0, 0);
             propertiesTableLayoutPanel.Controls.Add(partNumberTextBox, 1, 0);
             propertiesTableLayoutPanel.Controls.Add(titleTextBox, 1, 1);
@@ -336,7 +372,7 @@
             propertiesTableLayoutPanel.Controls.Add(materialTextBox, 1, 8);
             propertiesTableLayoutPanel.Controls.Add(statusComboBox, 1, 9);
             propertiesTableLayoutPanel.Controls.Add(notesTextBox, 1, 10);
-            propertiesTableLayoutPanel.Controls.Add(splitContainerRevision, 1, 3);
+            propertiesTableLayoutPanel.Controls.Add(revisionSplitContainer, 1, 3);
             propertiesTableLayoutPanel.Dock = DockStyle.Fill;
             propertiesTableLayoutPanel.Location = new Point(3, 3);
             propertiesTableLayoutPanel.Name = "propertiesTableLayoutPanel";
@@ -352,7 +388,7 @@
             propertiesTableLayoutPanel.RowStyles.Add(new RowStyle());
             propertiesTableLayoutPanel.RowStyles.Add(new RowStyle());
             propertiesTableLayoutPanel.RowStyles.Add(new RowStyle());
-            propertiesTableLayoutPanel.Size = new Size(650, 510);
+            propertiesTableLayoutPanel.Size = new Size(650, 506);
             propertiesTableLayoutPanel.TabIndex = 0;
             // 
             // notesLabel
@@ -361,21 +397,21 @@
             notesLabel.Dock = DockStyle.Fill;
             notesLabel.Location = new Point(3, 279);
             notesLabel.Name = "notesLabel";
-            notesLabel.Size = new Size(319, 233);
+            notesLabel.Size = new Size(319, 227);
             notesLabel.TabIndex = 19;
             notesLabel.Text = "Notes";
             notesLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // manufacturerLabel
+            // vendorLabel
             // 
-            manufacturerLabel.AutoSize = true;
-            manufacturerLabel.Dock = DockStyle.Fill;
-            manufacturerLabel.Location = new Point(3, 155);
-            manufacturerLabel.Name = "manufacturerLabel";
-            manufacturerLabel.Size = new Size(319, 31);
-            manufacturerLabel.TabIndex = 18;
-            manufacturerLabel.Text = "Manufacturer";
-            manufacturerLabel.TextAlign = ContentAlignment.MiddleCenter;
+            vendorLabel.AutoSize = true;
+            vendorLabel.Dock = DockStyle.Fill;
+            vendorLabel.Location = new Point(3, 155);
+            vendorLabel.Name = "vendorLabel";
+            vendorLabel.Size = new Size(319, 31);
+            vendorLabel.TabIndex = 18;
+            vendorLabel.Text = "Vendor";
+            vendorLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // originLabel
             // 
@@ -387,7 +423,6 @@
             originLabel.TabIndex = 16;
             originLabel.Text = "Origin";
             originLabel.TextAlign = ContentAlignment.MiddleCenter;
-            originLabel.Click += originLabel_Click;
             // 
             // descriptionLabel
             // 
@@ -444,16 +479,16 @@
             materialLabel.Text = "Material";
             materialLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // manufacturerPNLabel
+            // vendorPNLabel
             // 
-            manufacturerPNLabel.AutoSize = true;
-            manufacturerPNLabel.Dock = DockStyle.Fill;
-            manufacturerPNLabel.Location = new Point(3, 186);
-            manufacturerPNLabel.Name = "manufacturerPNLabel";
-            manufacturerPNLabel.Size = new Size(319, 31);
-            manufacturerPNLabel.TabIndex = 6;
-            manufacturerPNLabel.Text = "Manufacturer Part Number";
-            manufacturerPNLabel.TextAlign = ContentAlignment.MiddleCenter;
+            vendorPNLabel.AutoSize = true;
+            vendorPNLabel.Dock = DockStyle.Fill;
+            vendorPNLabel.Location = new Point(3, 186);
+            vendorPNLabel.Name = "vendorPNLabel";
+            vendorPNLabel.Size = new Size(319, 31);
+            vendorPNLabel.TabIndex = 6;
+            vendorPNLabel.Text = "Vendor Part Number";
+            vendorPNLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // partNumberLabel
             // 
@@ -465,11 +500,11 @@
             partNumberLabel.TabIndex = 4;
             partNumberLabel.Text = "Part Number";
             partNumberLabel.TextAlign = ContentAlignment.MiddleCenter;
-            partNumberLabel.Click += label1_Click_1;
             // 
             // partNumberTextBox
             // 
             partNumberTextBox.Dock = DockStyle.Fill;
+            partNumberTextBox.Enabled = false;
             partNumberTextBox.Location = new Point(328, 3);
             partNumberTextBox.MaxLength = 9;
             partNumberTextBox.Name = "partNumberTextBox";
@@ -479,6 +514,7 @@
             // titleTextBox
             // 
             titleTextBox.Dock = DockStyle.Fill;
+            titleTextBox.Enabled = false;
             titleTextBox.Location = new Point(328, 34);
             titleTextBox.MaxLength = 42;
             titleTextBox.Name = "titleTextBox";
@@ -488,6 +524,7 @@
             // descriptionTextBox
             // 
             descriptionTextBox.Dock = DockStyle.Fill;
+            descriptionTextBox.Enabled = false;
             descriptionTextBox.Location = new Point(328, 65);
             descriptionTextBox.MaxLength = 42;
             descriptionTextBox.Name = "descriptionTextBox";
@@ -496,21 +533,19 @@
             // 
             // originComboBox
             // 
-            originComboBox.AutoCompleteCustomSource.AddRange(new string[] { "Make", "Buy", "Modify" });
-            originComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-            originComboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             originComboBox.Dock = DockStyle.Fill;
-            originComboBox.FormattingEnabled = true;
+            originComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            originComboBox.Enabled = false;
             originComboBox.Items.AddRange(new object[] { "Make", "Buy", "Modify" });
             originComboBox.Location = new Point(328, 127);
             originComboBox.Name = "originComboBox";
             originComboBox.Size = new Size(319, 25);
             originComboBox.TabIndex = 23;
-            originComboBox.SelectedIndexChanged += originTextBox_SelectedIndexChanged;
             // 
             // manufacturerTextBox
             // 
             manufacturerTextBox.Dock = DockStyle.Fill;
+            manufacturerTextBox.Enabled = false;
             manufacturerTextBox.Location = new Point(328, 158);
             manufacturerTextBox.MaxLength = 42;
             manufacturerTextBox.Name = "manufacturerTextBox";
@@ -520,6 +555,7 @@
             // manufacturerPNTextBox
             // 
             manufacturerPNTextBox.Dock = DockStyle.Fill;
+            manufacturerPNTextBox.Enabled = false;
             manufacturerPNTextBox.Location = new Point(328, 189);
             manufacturerPNTextBox.MaxLength = 42;
             manufacturerPNTextBox.Name = "manufacturerPNTextBox";
@@ -529,6 +565,7 @@
             // materialTextBox
             // 
             materialTextBox.Dock = DockStyle.Fill;
+            materialTextBox.Enabled = false;
             materialTextBox.Location = new Point(328, 220);
             materialTextBox.MaxLength = 42;
             materialTextBox.Name = "materialTextBox";
@@ -538,53 +575,56 @@
             // statusComboBox
             // 
             statusComboBox.AutoCompleteCustomSource.AddRange(new string[] { "Finished", "Manufacturing / Assembly", "Design Complete", "Design In Progress", "Design Not Started", "Old Revision", "Obsolete" });
-            statusComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             statusComboBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             statusComboBox.Dock = DockStyle.Fill;
+            statusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            statusComboBox.Enabled = false;
             statusComboBox.FormattingEnabled = true;
             statusComboBox.Items.AddRange(new object[] { "Finished", "Manufacturing / Assembly", "Design Complete", "Design In Progress", "Design Not Started", "Obsolete" });
             statusComboBox.Location = new Point(328, 251);
             statusComboBox.Name = "statusComboBox";
             statusComboBox.Size = new Size(319, 25);
             statusComboBox.TabIndex = 27;
-            statusComboBox.SelectedIndexChanged += statusComboBox_SelectedIndexChanged;
             // 
             // notesTextBox
             // 
             notesTextBox.Dock = DockStyle.Fill;
+            notesTextBox.Enabled = false;
             notesTextBox.Location = new Point(328, 282);
             notesTextBox.MaxLength = 420;
             notesTextBox.Multiline = true;
             notesTextBox.Name = "notesTextBox";
-            notesTextBox.Size = new Size(319, 227);
+            notesTextBox.Size = new Size(319, 221);
             notesTextBox.TabIndex = 28;
             // 
-            // splitContainerRevision
+            // revisionSplitContainer
             // 
-            splitContainerRevision.Dock = DockStyle.Fill;
-            splitContainerRevision.FixedPanel = FixedPanel.Panel1;
-            splitContainerRevision.IsSplitterFixed = true;
-            splitContainerRevision.Location = new Point(328, 96);
-            splitContainerRevision.Name = "splitContainerRevision";
+            revisionSplitContainer.Dock = DockStyle.Fill;
+            revisionSplitContainer.FixedPanel = FixedPanel.Panel1;
+            revisionSplitContainer.IsSplitterFixed = true;
+            revisionSplitContainer.Location = new Point(328, 96);
+            revisionSplitContainer.Name = "revisionSplitContainer";
             // 
-            // splitContainerRevision.Panel1
+            // revisionSplitContainer.Panel1
             // 
-            splitContainerRevision.Panel1.Controls.Add(revisionTextBox);
+            revisionSplitContainer.Panel1.Controls.Add(revisionTextBox);
             // 
-            // splitContainerRevision.Panel2
+            // revisionSplitContainer.Panel2
             // 
-            splitContainerRevision.Panel2.Controls.Add(revisionDateTimePicker);
-            splitContainerRevision.Size = new Size(319, 25);
-            splitContainerRevision.TabIndex = 29;
+            revisionSplitContainer.Panel2.Controls.Add(revisionDateTimePicker);
+            revisionSplitContainer.Size = new Size(319, 25);
+            revisionSplitContainer.SplitterDistance = 70;
+            revisionSplitContainer.TabIndex = 29;
             // 
             // revisionTextBox
             // 
             revisionTextBox.Dock = DockStyle.Fill;
+            revisionTextBox.Enabled = false;
             revisionTextBox.Location = new Point(0, 0);
-            revisionTextBox.MaxLength = 5;
+            revisionTextBox.MaxLength = 4;
             revisionTextBox.Name = "revisionTextBox";
             revisionTextBox.ReadOnly = true;
-            revisionTextBox.Size = new Size(50, 25);
+            revisionTextBox.Size = new Size(70, 25);
             revisionTextBox.TabIndex = 0;
             revisionTextBox.TextAlign = HorizontalAlignment.Center;
             // 
@@ -594,121 +634,81 @@
             revisionDateTimePicker.Enabled = false;
             revisionDateTimePicker.Location = new Point(0, 0);
             revisionDateTimePicker.Name = "revisionDateTimePicker";
-            revisionDateTimePicker.Size = new Size(265, 25);
+            revisionDateTimePicker.Size = new Size(245, 25);
             revisionDateTimePicker.TabIndex = 0;
             // 
-            // revisionsPage
+            // whereUsedPage
             // 
-            revisionsPage.Controls.Add(revisionsListView);
-            revisionsPage.Location = new Point(4, 26);
-            revisionsPage.Name = "revisionsPage";
-            revisionsPage.Padding = new Padding(3);
-            revisionsPage.Size = new Size(656, 516);
-            revisionsPage.TabIndex = 1;
-            revisionsPage.Text = "Revisions";
-            revisionsPage.UseVisualStyleBackColor = true;
+            whereUsedPage.Controls.Add(whereUsedListView);
+            whereUsedPage.Location = new Point(4, 26);
+            whereUsedPage.Name = "whereUsedPage";
+            whereUsedPage.Padding = new Padding(3);
+            whereUsedPage.Size = new Size(656, 512);
+            whereUsedPage.TabIndex = 2;
+            whereUsedPage.Text = "Where Used";
+            whereUsedPage.UseVisualStyleBackColor = true;
             // 
-            // revisionsListView
+            // whereUsedListView
             // 
-            revisionsListView.Columns.AddRange(new ColumnHeader[] { revisionsRevisionColumnHeader, revisionsRevisionDateColumnHeader, revisionsFilepathColumnHeader });
-            revisionsListView.Dock = DockStyle.Fill;
-            revisionsListView.Location = new Point(3, 3);
-            revisionsListView.MultiSelect = false;
-            revisionsListView.Name = "revisionsListView";
-            revisionsListView.Size = new Size(650, 510);
-            revisionsListView.TabIndex = 0;
-            revisionsListView.UseCompatibleStateImageBehavior = false;
-            revisionsListView.View = View.Details;
+            whereUsedListView.Columns.AddRange(new ColumnHeader[] { whereUsedPartNumberColumnHeader, whereUsedTitleColumnHeader, whereUsedRevisionColumnHeader });
+            whereUsedListView.Dock = DockStyle.Fill;
+            whereUsedListView.Location = new Point(3, 3);
+            whereUsedListView.Name = "whereUsedListView";
+            whereUsedListView.Size = new Size(650, 506);
+            whereUsedListView.TabIndex = 0;
+            whereUsedListView.UseCompatibleStateImageBehavior = false;
+            whereUsedListView.View = View.Details;
             // 
-            // revisionsRevisionColumnHeader
+            // whereUsedPartNumberColumnHeader
             // 
-            revisionsRevisionColumnHeader.Text = "Revision";
-            revisionsRevisionColumnHeader.Width = 64;
+            whereUsedPartNumberColumnHeader.Text = "Part Number";
+            whereUsedPartNumberColumnHeader.Width = 292;
             // 
-            // revisionsRevisionDateColumnHeader
+            // whereUsedTitleColumnHeader
             // 
-            revisionsRevisionDateColumnHeader.Text = "Revision Date";
-            revisionsRevisionDateColumnHeader.Width = 121;
+            whereUsedTitleColumnHeader.Text = "Title";
+            whereUsedTitleColumnHeader.Width = 292;
             // 
-            // revisionsFilepathColumnHeader
+            // whereUsedRevisionColumnHeader
             // 
-            revisionsFilepathColumnHeader.Text = "Filepath";
-            revisionsFilepathColumnHeader.Width = 461;
+            whereUsedRevisionColumnHeader.Text = "Revision";
+            whereUsedRevisionColumnHeader.Width = 62;
             // 
-            // usagePage
+            // referencesPage
             // 
-            usagePage.Controls.Add(usageListView);
-            usagePage.Location = new Point(4, 26);
-            usagePage.Name = "usagePage";
-            usagePage.Padding = new Padding(3);
-            usagePage.Size = new Size(656, 516);
-            usagePage.TabIndex = 2;
-            usagePage.Text = "Usage";
-            usagePage.UseVisualStyleBackColor = true;
+            referencesPage.Controls.Add(whereUsedTableLayoutPanel);
+            referencesPage.Location = new Point(4, 26);
+            referencesPage.Name = "referencesPage";
+            referencesPage.Padding = new Padding(3);
+            referencesPage.Size = new Size(656, 512);
+            referencesPage.TabIndex = 3;
+            referencesPage.Text = "References";
+            referencesPage.UseVisualStyleBackColor = true;
             // 
-            // usageListView
+            // whereUsedTableLayoutPanel
             // 
-            usageListView.Columns.AddRange(new ColumnHeader[] { usagePartNumberColumnHeader, usageTitleColumnHeader, usageRevisionColumnHeader });
-            usageListView.Dock = DockStyle.Fill;
-            usageListView.Location = new Point(3, 3);
-            usageListView.Name = "usageListView";
-            usageListView.Size = new Size(650, 510);
-            usageListView.TabIndex = 0;
-            usageListView.UseCompatibleStateImageBehavior = false;
-            usageListView.View = View.Details;
-            // 
-            // usagePartNumberColumnHeader
-            // 
-            usagePartNumberColumnHeader.Text = "Part Number";
-            usagePartNumberColumnHeader.Width = 292;
-            // 
-            // usageTitleColumnHeader
-            // 
-            usageTitleColumnHeader.Text = "Title";
-            usageTitleColumnHeader.Width = 292;
-            // 
-            // usageRevisionColumnHeader
-            // 
-            usageRevisionColumnHeader.Text = "Revision";
-            usageRevisionColumnHeader.Width = 62;
-            // 
-            // dataPage
-            // 
-            dataPage.Controls.Add(dataTableLayoutPanel);
-            dataPage.Location = new Point(4, 26);
-            dataPage.Name = "dataPage";
-            dataPage.Padding = new Padding(3);
-            dataPage.Size = new Size(656, 516);
-            dataPage.TabIndex = 3;
-            dataPage.Text = "Data";
-            dataPage.UseVisualStyleBackColor = true;
-            // 
-            // dataTableLayoutPanel
-            // 
-            dataTableLayoutPanel.ColumnCount = 2;
-            dataTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.99667F));
-            dataTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75.003334F));
-            dataTableLayoutPanel.Controls.Add(SWFileLabel, 0, 0);
-            dataTableLayoutPanel.Controls.Add(SWDWGLabel, 0, 1);
-            dataTableLayoutPanel.Controls.Add(DWGPDFLabel, 0, 2);
-            dataTableLayoutPanel.Controls.Add(SWFileSplitContainer, 1, 0);
-            dataTableLayoutPanel.Controls.Add(SWDWGSplitContainer, 1, 1);
-            dataTableLayoutPanel.Controls.Add(DWGPDFSplitContainer, 1, 2);
-            dataTableLayoutPanel.Controls.Add(commonReferencesListView, 1, 3);
-            dataTableLayoutPanel.Controls.Add(revisionReferencesListView, 1, 4);
-            dataTableLayoutPanel.Controls.Add(commonReferencesLabel, 0, 3);
-            dataTableLayoutPanel.Controls.Add(revisionReferencesLabel, 0, 4);
-            dataTableLayoutPanel.Dock = DockStyle.Fill;
-            dataTableLayoutPanel.Location = new Point(3, 3);
-            dataTableLayoutPanel.Name = "dataTableLayoutPanel";
-            dataTableLayoutPanel.RowCount = 5;
-            dataTableLayoutPanel.RowStyles.Add(new RowStyle());
-            dataTableLayoutPanel.RowStyles.Add(new RowStyle());
-            dataTableLayoutPanel.RowStyles.Add(new RowStyle());
-            dataTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            dataTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            dataTableLayoutPanel.Size = new Size(650, 510);
-            dataTableLayoutPanel.TabIndex = 0;
+            whereUsedTableLayoutPanel.ColumnCount = 2;
+            whereUsedTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.99667F));
+            whereUsedTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75.003334F));
+            whereUsedTableLayoutPanel.Controls.Add(SWFileLabel, 0, 0);
+            whereUsedTableLayoutPanel.Controls.Add(SWDWGLabel, 0, 1);
+            whereUsedTableLayoutPanel.Controls.Add(DWGPDFLabel, 0, 2);
+            whereUsedTableLayoutPanel.Controls.Add(SWFileSplitContainer, 1, 0);
+            whereUsedTableLayoutPanel.Controls.Add(SWDWGSplitContainer, 1, 1);
+            whereUsedTableLayoutPanel.Controls.Add(DWGPDFSplitContainer, 1, 2);
+            whereUsedTableLayoutPanel.Controls.Add(revisionReferencesListView, 1, 3);
+            whereUsedTableLayoutPanel.Controls.Add(revisionReferencesLabel, 0, 3);
+            whereUsedTableLayoutPanel.Dock = DockStyle.Fill;
+            whereUsedTableLayoutPanel.Location = new Point(3, 3);
+            whereUsedTableLayoutPanel.Name = "whereUsedTableLayoutPanel";
+            whereUsedTableLayoutPanel.RowCount = 4;
+            whereUsedTableLayoutPanel.RowStyles.Add(new RowStyle());
+            whereUsedTableLayoutPanel.RowStyles.Add(new RowStyle());
+            whereUsedTableLayoutPanel.RowStyles.Add(new RowStyle());
+            whereUsedTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            whereUsedTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            whereUsedTableLayoutPanel.Size = new Size(650, 506);
+            whereUsedTableLayoutPanel.TabIndex = 0;
             // 
             // SWFileLabel
             // 
@@ -851,42 +851,22 @@
             DWGPDFFilepathTextBox.Size = new Size(428, 25);
             DWGPDFFilepathTextBox.TabIndex = 0;
             // 
-            // commonReferencesListView
-            // 
-            commonReferencesListView.Dock = DockStyle.Fill;
-            commonReferencesListView.Location = new Point(165, 96);
-            commonReferencesListView.Name = "commonReferencesListView";
-            commonReferencesListView.Size = new Size(482, 202);
-            commonReferencesListView.TabIndex = 6;
-            commonReferencesListView.UseCompatibleStateImageBehavior = false;
-            // 
             // revisionReferencesListView
             // 
             revisionReferencesListView.Dock = DockStyle.Fill;
-            revisionReferencesListView.Location = new Point(165, 304);
+            revisionReferencesListView.Location = new Point(165, 96);
             revisionReferencesListView.Name = "revisionReferencesListView";
-            revisionReferencesListView.Size = new Size(482, 203);
+            revisionReferencesListView.Size = new Size(482, 407);
             revisionReferencesListView.TabIndex = 7;
             revisionReferencesListView.UseCompatibleStateImageBehavior = false;
-            // 
-            // commonReferencesLabel
-            // 
-            commonReferencesLabel.AutoSize = true;
-            commonReferencesLabel.Dock = DockStyle.Fill;
-            commonReferencesLabel.Location = new Point(3, 93);
-            commonReferencesLabel.Name = "commonReferencesLabel";
-            commonReferencesLabel.Size = new Size(156, 208);
-            commonReferencesLabel.TabIndex = 8;
-            commonReferencesLabel.Text = "Common References";
-            commonReferencesLabel.TextAlign = ContentAlignment.TopCenter;
             // 
             // revisionReferencesLabel
             // 
             revisionReferencesLabel.AutoSize = true;
             revisionReferencesLabel.Dock = DockStyle.Fill;
-            revisionReferencesLabel.Location = new Point(3, 301);
+            revisionReferencesLabel.Location = new Point(3, 93);
             revisionReferencesLabel.Name = "revisionReferencesLabel";
-            revisionReferencesLabel.Size = new Size(156, 209);
+            revisionReferencesLabel.Size = new Size(156, 413);
             revisionReferencesLabel.TabIndex = 9;
             revisionReferencesLabel.Text = "Revision References";
             revisionReferencesLabel.TextAlign = ContentAlignment.TopCenter;
@@ -896,7 +876,7 @@
             previewPage.Location = new Point(4, 26);
             previewPage.Name = "previewPage";
             previewPage.Padding = new Padding(3);
-            previewPage.Size = new Size(656, 516);
+            previewPage.Size = new Size(656, 512);
             previewPage.TabIndex = 4;
             previewPage.Text = "Preview";
             previewPage.UseVisualStyleBackColor = true;
@@ -904,45 +884,50 @@
             // menuStrip
             // 
             menuStrip.ImageScalingSize = new Size(18, 18);
-            menuStrip.Items.AddRange(new ToolStripItem[] { projectToolStripMenuItem, settingsMenu });
+            menuStrip.Items.AddRange(new ToolStripItem[] { projectListToolStripComboBox, fileToolStripMenuItem });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(1008, 25);
+            menuStrip.Size = new Size(1008, 29);
             menuStrip.TabIndex = 2;
             menuStrip.Text = "menuStrip";
             // 
-            // projectToolStripMenuItem
+            // projectListToolStripComboBox
             // 
-            projectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { selectProjectToolStripMenuItem });
-            projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            projectToolStripMenuItem.Size = new Size(60, 21);
-            projectToolStripMenuItem.Text = "Project";
+            projectListToolStripComboBox.Alignment = ToolStripItemAlignment.Right;
+            projectListToolStripComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            projectListToolStripComboBox.FlatStyle = FlatStyle.Standard;
+            projectListToolStripComboBox.MaxLength = 24;
+            projectListToolStripComboBox.Name = "projectListToolStripComboBox";
+            projectListToolStripComboBox.Size = new Size(256, 25);
+            projectListToolStripComboBox.Sorted = true;
+            projectListToolStripComboBox.SelectedIndexChanged += projectListToolStripComboBox_SelectedIndexChanged;
             // 
-            // selectProjectToolStripMenuItem
+            // fileToolStripMenuItem
             // 
-            selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
-            selectProjectToolStripMenuItem.Size = new Size(160, 24);
-            selectProjectToolStripMenuItem.Text = "Select &Project";
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(39, 25);
+            fileToolStripMenuItem.Text = "File";
             // 
-            // settingsMenu
+            // newToolStripMenuItem
             // 
-            settingsMenu.DropDownItems.AddRange(new ToolStripItem[] { minioToolStripMenuItem, authenticationToolStripMenuItem });
-            settingsMenu.Name = "settingsMenu";
-            settingsMenu.Size = new Size(66, 21);
-            settingsMenu.Text = "Settings";
-            settingsMenu.Click += toolStripMenuItem2_Click;
+            newToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newProjectToolStripMenuItem, newComponentToolStripMenuItem });
+            newToolStripMenuItem.Name = "newToolStripMenuItem";
+            newToolStripMenuItem.Size = new Size(198, 24);
+            newToolStripMenuItem.Text = "New";
             // 
-            // minioToolStripMenuItem
+            // newProjectToolStripMenuItem
             // 
-            minioToolStripMenuItem.Name = "minioToolStripMenuItem";
-            minioToolStripMenuItem.Size = new Size(164, 24);
-            minioToolStripMenuItem.Text = "Minio";
+            newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
+            newProjectToolStripMenuItem.Size = new Size(198, 24);
+            newProjectToolStripMenuItem.Text = "Project";
+            newProjectToolStripMenuItem.Click += newProjectToolStripMenuItem_Click;
             // 
-            // authenticationToolStripMenuItem
+            // newComponentToolStripMenuItem
             // 
-            authenticationToolStripMenuItem.Name = "authenticationToolStripMenuItem";
-            authenticationToolStripMenuItem.Size = new Size(164, 24);
-            authenticationToolStripMenuItem.Text = "Authentication";
+            newComponentToolStripMenuItem.Name = "newComponentToolStripMenuItem";
+            newComponentToolStripMenuItem.Size = new Size(198, 24);
+            newComponentToolStripMenuItem.Text = "Component";
             // 
             // DataBrowser
             // 
@@ -960,32 +945,29 @@
             Name = "DataBrowser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "DAABOM Browser";
-            Load += DataBrowser_Load;
             statusStrip.ResumeLayout(false);
             statusStrip.PerformLayout();
             splitContainerMain.Panel1.ResumeLayout(false);
             splitContainerMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainerMain).EndInit();
             splitContainerMain.ResumeLayout(false);
-            splitContainerLeft.Panel1.ResumeLayout(false);
-            splitContainerLeft.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainerLeft).EndInit();
-            splitContainerLeft.ResumeLayout(false);
+            treeTabControl.ResumeLayout(false);
+            projectTabPage.ResumeLayout(false);
+            componentTabPage.ResumeLayout(false);
             tabControl.ResumeLayout(false);
             propertiesPage.ResumeLayout(false);
             propertiesPage.PerformLayout();
             propertiesTableLayoutPanel.ResumeLayout(false);
             propertiesTableLayoutPanel.PerformLayout();
-            splitContainerRevision.Panel1.ResumeLayout(false);
-            splitContainerRevision.Panel1.PerformLayout();
-            splitContainerRevision.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainerRevision).EndInit();
-            splitContainerRevision.ResumeLayout(false);
-            revisionsPage.ResumeLayout(false);
-            usagePage.ResumeLayout(false);
-            dataPage.ResumeLayout(false);
-            dataTableLayoutPanel.ResumeLayout(false);
-            dataTableLayoutPanel.PerformLayout();
+            revisionSplitContainer.Panel1.ResumeLayout(false);
+            revisionSplitContainer.Panel1.PerformLayout();
+            revisionSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)revisionSplitContainer).EndInit();
+            revisionSplitContainer.ResumeLayout(false);
+            whereUsedPage.ResumeLayout(false);
+            referencesPage.ResumeLayout(false);
+            whereUsedTableLayoutPanel.ResumeLayout(false);
+            whereUsedTableLayoutPanel.PerformLayout();
             SWFileSplitContainer.Panel1.ResumeLayout(false);
             SWFileSplitContainer.Panel2.ResumeLayout(false);
             SWFileSplitContainer.Panel2.PerformLayout();
@@ -1013,24 +995,20 @@
         private SplitContainer splitContainerMain;
         private TabControl tabControl;
         private TabPage propertiesPage;
-        private TabPage revisionsPage;
         private MenuStrip menuStrip;
         private ToolStripMenuItem settingsMenu;
-        private TabPage usagePage;
-        private SplitContainer splitContainerLeft;
-        private ComboBox projectComboBox;
-        private TreeView projectTreeView;
+        private TabPage whereUsedPage;
         private TableLayoutPanel propertiesTableLayoutPanel;
         private Label partNumberLabel;
         private Label revisionLabel;
         private Label titleLabel;
         private Label statusLabel;
         private Label materialLabel;
-        private Label manufacturerPNLabel;
+        private Label vendorPNLabel;
         private Label descriptionLabel;
         private Label originLabel;
-        private Label manufacturerLabel;
-        private TabPage dataPage;
+        private Label vendorLabel;
+        private TabPage referencesPage;
         private TextBox partNumberTextBox;
         private TextBox titleTextBox;
         private TextBox descriptionTextBox;
@@ -1040,30 +1018,24 @@
         private TextBox manufacturerPNTextBox;
         private TextBox materialTextBox;
         private ComboBox statusComboBox;
-        private SplitContainer splitContainerRevision;
+        private SplitContainer revisionSplitContainer;
         private TextBox revisionTextBox;
         private DateTimePicker revisionDateTimePicker;
         private TextBox notesTextBox;
         private ToolStripStatusLabel localFilepathToolStripStatusLabel;
         private ToolStripProgressBar toolStripProgressBar;
-        private ListView revisionsListView;
-        private ColumnHeader revisionsRevisionColumnHeader;
-        private ColumnHeader revisionsRevisionDateColumnHeader;
-        private ColumnHeader revisionsFilepathColumnHeader;
         private ToolStripSplitButton editPropertiesSplitButton;
         private TabPage previewPage;
         private ToolStripMenuItem enableEditingToolStripMenuItem;
         private ToolStripMenuItem saveChangesToolStripMenuItem;
         private ToolStripMenuItem discardChangesToolStripMenuItem;
-        private ListView usageListView;
-        private ColumnHeader usagePartNumberColumnHeader;
-        private ColumnHeader usageTitleColumnHeader;
-        private ColumnHeader usageRevisionColumnHeader;
-        private ToolStripMenuItem projectToolStripMenuItem;
-        private ToolStripMenuItem selectProjectToolStripMenuItem;
+        private ListView whereUsedListView;
+        private ColumnHeader whereUsedPartNumberColumnHeader;
+        private ColumnHeader whereUsedTitleColumnHeader;
+        private ColumnHeader whereUsedRevisionColumnHeader;
         private ToolStripMenuItem minioToolStripMenuItem;
         private ToolStripMenuItem authenticationToolStripMenuItem;
-        private TableLayoutPanel dataTableLayoutPanel;
+        private TableLayoutPanel whereUsedTableLayoutPanel;
         private Label SWFileLabel;
         private Label SWDWGLabel;
         private Label DWGPDFLabel;
@@ -1076,13 +1048,20 @@
         private SplitContainer DWGPDFSplitContainer;
         private TextBox DWGPDFFilepathTextBox;
         private Button DWGPDFOpenButton;
-        private ListView commonReferencesListView;
         private ListView revisionReferencesListView;
-        private Label commonReferencesLabel;
         private Label revisionReferencesLabel;
-        private ToolStripStatusLabel localToolStripStatusLabel;
-        private ToolStripStatusLabel projectToolStripStatusLabel;
-        private ToolStripStatusLabel projectNameToolStripStatusLabel;
+        private ToolStripStatusLabel localFilepathLabelToolStripStatusLabel;
         private ToolStripStatusLabel serverToolStripStatusLabel;
+        private TabControl treeTabControl;
+        private TabPage projectTabPage;
+        private TabPage componentTabPage;
+        private TreeView componentTreeView;
+        private TreeView projectTreeView;
+        private ImageList treeViewImageList;
+        private ToolStripComboBox projectListToolStripComboBox;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem newToolStripMenuItem;
+        private ToolStripMenuItem newProjectToolStripMenuItem;
+        private ToolStripMenuItem newComponentToolStripMenuItem;
     }
 }

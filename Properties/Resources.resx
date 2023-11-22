@@ -136,4 +136,31 @@
   <data name="network_drive_unavailable-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\network_drive_unavailable-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LibreBarcode39Text_Regular" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LibreBarcode39Text-Regular.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="osifont" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\osifont.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\check-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="circle_question_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\circle_question-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gears_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gears-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gears_3_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gears_3-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="desktop_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\desktop-3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="directory_closed_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\directory_closed-1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cylinder_database_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cylinder_database-0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

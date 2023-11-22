@@ -1,14 +1,5 @@
 ﻿using DAABOM.Properties;
-using Minio.DataModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace DAABOM
 {
@@ -37,7 +28,7 @@ namespace DAABOM
             {
                 Program.workingFolderPath =
                     workingFolderTextBox.Text =
-                    Properties.Settings.Default.WorkingFolder =
+                    Settings.Default.WorkingFolder =
                     workingFolderBrowserDialog.SelectedPath;
 
                 launchLocalButton.Enabled = true;
@@ -74,7 +65,7 @@ namespace DAABOM
         private void launchLocalButton_Click(object sender, EventArgs e)
         {
             DataBrowser browser = new(false);
-            browser.ShowDialog();
+            browser.Show();
         }
 
         private void launchOnlineButton_Click(object sender, EventArgs e)
@@ -82,7 +73,7 @@ namespace DAABOM
             Program.workingBucket = Program.bucketDictionary[minioBucketComboBox.Text];
 
             DataBrowser browser = new(true);
-            browser.ShowDialog();
+            browser.Show();
         }
     }
 }

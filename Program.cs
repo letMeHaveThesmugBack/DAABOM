@@ -4,6 +4,7 @@ using Minio.DataModel;
 using Minio.DataModel.Result;
 using Minio.Exceptions;
 using System.Net;
+using System.Reflection;
 
 namespace DAABOM
 {

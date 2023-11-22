@@ -1,14 +1,4 @@
 ﻿using DAABOM.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Net;
 
 namespace DAABOM
@@ -40,22 +30,14 @@ namespace DAABOM
             cancellationTokenSource.Cancel();
         }
 
-        internal void SetWaitingState(bool isWaiting)
+        internal void SetWaitingState(bool waiting)
         {
-            if (isWaiting)
-            {
-                Cursor = Cursors.WaitCursor;
-            }
+            Cursor = waiting ? Cursors.WaitCursor : Cursors.Default;
 
-            else
-            {
-                Cursor = Cursors.Default;
-            }
-
-            connectButton.Enabled = !isWaiting;
-            serverTextBox.Enabled = !isWaiting;
-            usernameTextBox.Enabled = !isWaiting;
-            passwordTextBox.Enabled = !isWaiting;
+            connectButton.Enabled = !waiting;
+            serverTextBox.Enabled = !waiting;
+            usernameTextBox.Enabled = !waiting;
+            passwordTextBox.Enabled = !waiting;
         }
     }
 }

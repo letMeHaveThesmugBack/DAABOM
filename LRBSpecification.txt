@@ -1,0 +1,122 @@
+﻿---File Format Specification for .lrb Files---
+---Version 1.0.0---------------------------------
+
+-All measurements are in bytes
+-All strings are encoded in UTF-8
+-All UTF-8 encoded strings are padded with null characters to meet the required byte length
+-Any section with a length of 0x??? has arbitrary length
+-Any offset starting with ?x represents a hex offset from the first byte after the last section
+	with arbitrary length
+
+FILE LAYOUT:
+	
+	-Columns are:
+	 offset from file start, length, description
+	
+	**************************************************************************************************
+	
+	Header (From 0x000 with length 0x06D):
+		0x000 0x001 Byte denoting the start of the header: ^A, 0x01, SOH
+		0x001 0x024 "3cd86ad1-d5cf-4196-97ab-167545a1efe3"
+		0x025 0x001 Major version number
+		0x026 0x001 Minor version number
+		0x027 0x001 Patch number
+		0x028 0x018 Project title (string)
+		0x040 0x024 Project GUID (string)
+		0x064 0x004 Length of the file excluding the header (ulong)
+		0x068 0x004 XxHash32 hash of file excluding the header 
+		0x06C 0x001 Byte denoting the end of the Header: ^B, 0x02, STX
+	Project Data (From 0x06D with length 0x093)
+		0x06D 0x008 Project date and time of creation (C# DateTime.ToBinary)
+		0x075 0x008 Project date and time of last modification, (C# DateTime.ToBinary)
+		0x07D 0x082 Reserved. Filled with ^@, 0x00, NUL
+		0x0FF 0x001 Byte denoting the end of the Project Data: ^\, 0x1C, FS
+	Component Data (From 0x100 with length 0x???)
+		0x100 0x??? Component entries, arbitrary number. See the next section
+	Footer (From 0x??? with length 0x001)
+		?x000 0x002 Bytes denoting the end of the file: ^C ^D, 0x03 0x04, ETX EOT
+	
+	**************************************************************************************************
+
+COMPONENT ENTRY LAYOUT:
+	
+	-Columns are:
+	 offset from the end of the previous component, length, description
+	
+	**************************************************************************************************
+	
+	Component Header (From 0x000 with length 0x23C)
+		0x000 0x009 Part number (string)
+		0x009 0x004 Revision (string)
+		0x00D 0x018 Component title (string)
+		0x025 0x008 Revision date and time, (C# DateTime.ToBinary)
+		0x02D 0x001 Status code (string)
+		0x02E 0x018 Component description (string)
+		0x046 0x001 Origin code (string)
+		0x047 0x018 Vendor (string)
+		0x05F 0x018 Vendor part number (string)
+		0x077 0x018 Material (string)
+		0x08F 0x1A4 Component notes (string)
+		0x233 0x004 Offset from file start to the first byte of the next revision component entry. 
+					0 (NUL) indicates that this is the most recent revision
+		0x237 0x004 Offset from file start to the first byte of the previous revision component entry.
+					0 (NUL) indicates that this is the first revision
+		0x23B 0x001 Byte denoting the end of the Component Header: ^], 0x1D, GS
+	Component BOM (From 0x23C with length 0x???)
+		0x23C 0x??? BOM items, arbitrary number. See next section
+		?x000 0x001 Byte denoting the end of the BOM: ^^, 0x1E, RS
+	Component Where Used (From ?x000 with length 0x???)
+		?x000 0x??? Component Where Used entries, arbitrary number. See further section
+		?x000 0x001 Byte denoting the end of the Where Used section: ^_, 0x1F, US
+	Component References (From ?x000 with length 0x???)
+		?x000 0x??? SOLIDWORKS part/assembly filename, arbitrary length (string)
+		?x000 0x001 Byte denoting the end of the filename, ^W, 0x17, ETB
+		?x001 0x??? SOLIDWORKS drawing filename, arbitrary length (string)
+		?x000 0x001 Byte denoting the end of the filename, ^W, 0x17, ETB
+		?x001 0x??? Drawing PDF filename, arbitrary length (string)
+		?x000 0x001 Byte denoting the end of the filename, ^W, 0x17, ETB
+		?x000 0x??? Component Reference entries, arbitrary number. See further section
+		?x000 0x001 Byte denoting the end of the component: ^Y, 0x19, EM
+	
+	**************************************************************************************************
+
+BOM ITEM LAYOUT:
+	
+	-Columns are:
+	 offset from the first byte after the last section or item, length, description
+	
+	**************************************************************************************************
+	
+	BOM Item (From 0x000 with length 0x009)
+		0x000 0x004 Offset from file start to the first bit of the corresponding component
+		0x004 0x002 BOM item number (UShort)
+		0x006 0x002 Quantity (UShort)
+		0x008 0x001 Byte denoting the end of the item: ^W, 0x17, ETB
+	
+	**************************************************************************************************
+
+WHERE USED ENTRY LAYOUT:
+	
+	-Columns are:
+	 offset from the first byte after the last section or entry, length, description
+	
+	**************************************************************************************************
+
+	 Where Used Entry (From 0x000 with length 0x005)
+		0x000 0x004 Offset from file start to the first bit of the corresponding component
+		0x004 0x001 Byte denoting the end of the entry: ^W, 0x17, ETB
+	
+	**************************************************************************************************
+
+REFERENCE ENTRY LAYOUT:
+	
+	-Columns are:
+	 offset from the first byte after the last section or entry, length, description
+
+	 *************************************************************************************************
+
+	 Reference Entry (From 0x000 with length 0x???)
+		0x000 0x??? Reference filename, arbitrary length (string)
+		?x000 0x001 Byte denoting the end of the entry: ^W, 0x17, ETB
+
+	**************************************************************************************************

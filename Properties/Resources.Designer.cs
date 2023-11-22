@@ -61,6 +61,36 @@ namespace DAABOM.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap check_1 {
+            get {
+                object obj = ResourceManager.GetObject("check_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap circle_question_1 {
+            get {
+                object obj = ResourceManager.GetObject("circle_question_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cylinder_database_0 {
+            get {
+                object obj = ResourceManager.GetObject("cylinder_database_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon DAABOMIcon {
@@ -83,6 +113,56 @@ namespace DAABOM.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap desktop_3 {
+            get {
+                object obj = ResourceManager.GetObject("desktop_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap directory_closed_1 {
+            get {
+                object obj = ResourceManager.GetObject("directory_closed_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gears_1 {
+            get {
+                object obj = ResourceManager.GetObject("gears_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gears_3_1 {
+            get {
+                object obj = ResourceManager.GetObject("gears_3_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] LibreBarcode39Text_Regular {
+            get {
+                object obj = ResourceManager.GetObject("LibreBarcode39Text_Regular", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap network_drive_unavailable_1 {
             get {
                 object obj = ResourceManager.GetObject("network_drive_unavailable-1", resourceCulture);
@@ -97,6 +177,16 @@ namespace DAABOM.Properties {
             get {
                 object obj = ResourceManager.GetObject("network_drive_world-1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] osifont {
+            get {
+                object obj = ResourceManager.GetObject("osifont", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

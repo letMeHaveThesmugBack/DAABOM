@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel = new TableLayoutPanel();
             passwordTextBox = new TextBox();
             usernameTextBox = new TextBox();
             passwordLabel = new Label();
@@ -38,32 +38,32 @@
             buttonTableLayoutPanel = new TableLayoutPanel();
             connectButton = new Button();
             cancelButton = new Button();
-            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel.SuspendLayout();
             buttonTableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanel
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75F));
-            tableLayoutPanel1.Controls.Add(passwordTextBox, 1, 2);
-            tableLayoutPanel1.Controls.Add(usernameTextBox, 1, 1);
-            tableLayoutPanel1.Controls.Add(passwordLabel, 0, 2);
-            tableLayoutPanel1.Controls.Add(usernameLabel, 0, 1);
-            tableLayoutPanel1.Controls.Add(serverLabel, 0, 0);
-            tableLayoutPanel1.Controls.Add(serverTextBox, 1, 0);
-            tableLayoutPanel1.Controls.Add(buttonTableLayoutPanel, 0, 3);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 4;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.Size = new Size(304, 124);
-            tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel.ColumnCount = 2;
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75F));
+            tableLayoutPanel.Controls.Add(passwordTextBox, 1, 2);
+            tableLayoutPanel.Controls.Add(usernameTextBox, 1, 1);
+            tableLayoutPanel.Controls.Add(passwordLabel, 0, 2);
+            tableLayoutPanel.Controls.Add(usernameLabel, 0, 1);
+            tableLayoutPanel.Controls.Add(serverLabel, 0, 0);
+            tableLayoutPanel.Controls.Add(serverTextBox, 1, 0);
+            tableLayoutPanel.Controls.Add(buttonTableLayoutPanel, 0, 3);
+            tableLayoutPanel.Dock = DockStyle.Fill;
+            tableLayoutPanel.Location = new Point(0, 0);
+            tableLayoutPanel.Name = "tableLayoutPanel";
+            tableLayoutPanel.RowCount = 4;
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+            tableLayoutPanel.Size = new Size(304, 124);
+            tableLayoutPanel.TabIndex = 0;
             // 
             // passwordTextBox
             // 
@@ -128,7 +128,7 @@
             // buttonTableLayoutPanel
             // 
             buttonTableLayoutPanel.ColumnCount = 2;
-            tableLayoutPanel1.SetColumnSpan(buttonTableLayoutPanel, 2);
+            tableLayoutPanel.SetColumnSpan(buttonTableLayoutPanel, 2);
             buttonTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             buttonTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             buttonTableLayoutPanel.Controls.Add(connectButton, 0, 0);
@@ -172,7 +172,7 @@
             CancelButton = cancelButton;
             ClientSize = new Size(304, 124);
             ControlBox = false;
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(tableLayoutPanel);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -183,15 +183,15 @@
             Text = "DAABOM Minio Server Selection";
             TopMost = true;
             Load += MinioServerDialog_Load;
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            tableLayoutPanel.ResumeLayout(false);
+            tableLayoutPanel.PerformLayout();
             buttonTableLayoutPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel;
         private Label serverLabel;
         private Label passwordLabel;
         private Label usernameLabel;
